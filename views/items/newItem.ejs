@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Item to <%= category.name %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans min-h-screen">
+  <header class="bg-indigo-600 text-white shadow">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold">➕ Add Item to <%= category.name %></h1>
+      <a href="/categories/<%= category.id %>/items" class="text-sm bg-white text-indigo-600 px-3 py-1 rounded hover:bg-indigo-50 transition">← Back to Category</a>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 py-10">
+    <% if (locals.error) { %>
+      <div class="bg-red-500 text-white p-3 rounded mb-4 shadow">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <form action="/categories/<%= category.id %>/items" method="POST" class="bg-white shadow-md rounded-lg p-6 space-y-5">
+      <div>
+        <label for="name" class="block text-sm font-semibold mb-1">Item Name <span class="text-red-500">*</span></label>
+        <input type="text" id="name" name="name" required value="<%= typeof name !== 'undefined' ? name : '' %>"
+               class="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+
+      <div>
+        <label for="description" class="block text-sm font-semibold mb-1">Description</label>
+        <textarea id="description" name="description" rows="3"
+                  class="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"><%= typeof description !== 'undefined' ? description : '' %></textarea>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="quantity" class="block text-sm font-semibold mb-1">Quantity <span class="text-red-500">*</span></label>
+          <input type="number" id="quantity" name="quantity" required min="0" step="1" value="<%= typeof quantity !== 'undefined' ? quantity : '' %>"
+                 class="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+
+        <div>
+          <label for="price" class="block text-sm font-semibold mb-1">Price ($) <span class="text-red-500">*</span></label>
+          <input type="number" id="price" name="price" required min="0" step="0.01" value="<%= typeof price !== 'undefined' ? price : '' %>"
+                 class="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <button type="submit" class="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition">
+          Save Item
+        </button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

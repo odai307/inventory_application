@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= item.name %> - Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans min-h-screen">
+  <header class="bg-indigo-600 text-white shadow">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold">🔍 <%= item.name %> - Details</h1>
+      <a href="/categories/<%= item.category_id %>/items" class="text-sm bg-white text-indigo-600 px-3 py-1 rounded hover:bg-indigo-50 transition">← Back to Category</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-6">
+    <section class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-xl font-semibold mb-4">📦 Item Information</h2>
+      <p><strong>Name:</strong> <%= item.name %></p>
+      <p><strong>Description:</strong> <%= item.description || 'No description provided.' %></p>
+      <p><strong>Quantity:</strong> <%= item.quantity %></p>
+      <p><strong>Price:</strong> $<%= item.price %></p>
+      <p><strong>Created at:</strong> <%= new Date(item.created_at).toLocaleString() %></p>
+      <p><strong>Last updated:</strong> <%= new Date(item.updated_at).toLocaleString() %></p>
+    </section>
+
+    <!-- Action buttons -->
+    <div class="flex gap-3">
+      <a href="/items/<%= item.id %>/update"
+         class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">
+        ✏️ Edit Item
+      </a>
+
+      <form action="/items/<%= item.id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+        <button type="submit"
+                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+          🗑️ Delete Item
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
