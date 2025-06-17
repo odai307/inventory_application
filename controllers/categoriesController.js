@@ -7,8 +7,9 @@ async function listCategories(req, res) {
         const categories = await categoriesModel.getAllCategories();
         res.render("index", {categories});
     } catch(error) {
-        res.redirect("/", {
-            error: error.message
+        res.render("/", {
+            error: error.message,
+            categories: []
         });
     }
 }
