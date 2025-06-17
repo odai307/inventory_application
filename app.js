@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const categoriesModel = require("./models/categoriesModel");
+
 
 const categoriesRouter = require("./routes/categoriesRouter");
 const itemsRouter = require("./routes/itemsRouter");
